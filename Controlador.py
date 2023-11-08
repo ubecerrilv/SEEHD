@@ -20,7 +20,8 @@ class Controlador:
         self.pantalla.mostrarMPrincipal()
         
     def registrarSalida(self, usuario):
-        pago = self.pantalla.leerPago()
+        self.baseDeDatos.registrarSalida(usuario)
+        #pago = self.pantalla.leerPago() PENDIENTE
         
         if pago:
             self.baseDeDatos.registarSalida(usuario)
@@ -35,18 +36,20 @@ class Controlador:
         while True:
             #CREAR USUARIO PARA LAS LECTURAS Y ESCRITURAS
             usuario = Usuario.Usuario()
-            #LEER DATOS DE ENTRADA SI ES QUE LOS HA
-            usuario.setID(self.pantalla.leerIDHuella())
-            #VERIFICAR SI EL USUARIO EXISTE            
-            existeUsr = self.baseDeDatos.existeUsr(usuario)
+            #LEER DATOS DE ENTRADA SI ES QUE LOS HAY
+            usuario_id = self.pantalla.leerIDHuella()
+            if usuario_id != 0:
+                usuario.setID(self.pantalla.leerIDHuella())
+                #VERIFICAR SI EL USUARIO EXISTE            
+                existeUsr = self.baseDeDatos.existeUsr(usuario)
             
-            if existeUsr:
-                #VERIFICAR SI EL USUARIO TIENE HISTORIA (HA ENTRADO)
-                existeHistoria = self.baseDeDatos.existeHistoria(usuario)
-                if existeHistoria:
-                    self.registrarSalida(usuario)
+                if existeUsr:
+                    #VERIFICAR SI EL USUARIO TIENE HISTORIA (HA ENTRADO)
+                    existeHistoria = self.baseDeDatos.existeHistoria(usuario)
+                    if existeHistoria:
+                        self.registrarSalida(usuario)
+                    else:
+                        self.registrarEntrada(usuario)
                 else:
+                    self.baseDeDatos.registrarUsr(usuario)
                     self.registrarEntrada(usuario)
-            else:
-                self.baseDeDatos.registrarUsr(usuario)
-                self.registrarEntrada(usuario)

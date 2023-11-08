@@ -27,8 +27,8 @@ CREATE TABLE Historia (
     entrada DATETIME NOT NULL,
     salida DATETIME,
     horas DECIMAL(10, 2),
-    usuario_id INT, NOT NULL,
-    cobro_id INT, NOT NULL,
+    usuario_id INT NOT NULL,
+    cobro_id INT NOT NULL,
     FOREIGN KEY (usuario_id) REFERENCES Usuario(id),
     FOREIGN KEY (cobro_id) REFERENCES Cobro(id)
 );

@@ -22,5 +22,8 @@ class Pantalla:
         self.puerto.write(str("4").encode())
         
     def leerIDHuella(self):
-        self.puerto.read() #PENDIENTE
-        pass
+        id = self.puerto.read()
+        if id == "0":
+            return 0
+        else:
+            return int(id)

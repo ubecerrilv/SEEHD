@@ -30,15 +30,16 @@ void loop(void ) {
      char opcion = Serial.read();
      if (opcion == '4'){
         tft.drawRGBBitmap(0,20,Imagen1,128,128);
-        Serial.print("Hola1");
+        Serial.print("1");
      }else if(opcion == '1'){
         tft.drawRGBBitmap(0,20,Imagen2,128,128);
-        Serial.print("Hola2");
+        Serial.print("2");
      }else if(opcion == '2'){
         tft.drawRGBBitmap(0,20,Imagen3,128,128);
-        Serial.print("Hola3");
+        Serial.print("3");
      }
      //FALTA IMAGEN DE PRECIO A PAGAR
+
 
 
  /* tft.fillScreen(ST77XX_RED);
