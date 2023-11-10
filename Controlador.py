@@ -20,8 +20,8 @@ class Controlador:
         self.pantalla.mostrarMPrincipal()
         
     def registrarSalida(self, usuario):
-        self.baseDeDatos.registrarSalida(usuario)
-        #pago = self.pantalla.leerPago() PENDIENTE
+        usrCompleto = self.baseDeDatos.registrarSalida(usuario)
+        self.pantalla.MostrarPago(usrCompleto.getPago)
         
         if pago:
             self.baseDeDatos.registarSalida(usuario)
@@ -44,7 +44,7 @@ class Controlador:
                 existeUsr = self.baseDeDatos.existeUsr(usuario)
             
                 if existeUsr:
-                    #VERIFICAR SI EL USUARIO TIENE HISTORIA (HA ENTRADO)
+                    #VERIFICAR SI EL USUARIO TIENE HISTORIA Y NO HA SALIDO(HA ENTRADO)
                     existeHistoria = self.baseDeDatos.existeHistoria(usuario)
                     if existeHistoria:
                         self.registrarSalida(usuario)

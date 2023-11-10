@@ -95,6 +95,7 @@ class BaseDeDatos:
                 cobroTotal = round(horas * cobroHora, 2)
             else:
                 cobroTotal = None
-            return cls(ID, entrada, salida, horas, cobroHora, cobroTotal)
+            usr = Usuario(ID, entrada, salida, horas, cobroHora, cobroTotal)
+            return usr
         else:
             return None

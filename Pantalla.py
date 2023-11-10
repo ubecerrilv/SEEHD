@@ -27,3 +27,6 @@ class Pantalla:
             return 0
         else:
             return int(id)
+    
+    def mostrarPago(pago):
+        self.puerto.write(str(pago).encode)

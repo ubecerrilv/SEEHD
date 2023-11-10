@@ -1,9 +1,9 @@
 #include <Adafruit_ST7735.h>  // Hardware-specific library for ST7735
 #include <SPI.h>
 #include "Adafruit_GFX.h"
-#include "Imagen1.h"
-#include "Imagen2.h"
-#include "Imagen3.h"
+#include "1.h"
+#include "2.h"
+#include "3.h"
 
 
 //Pines para pantalla
@@ -27,16 +27,42 @@ void setup() {
 
 void loop(void ) {
 
-     char opcion = Serial.read();
-     if (opcion == '4'){
-        tft.drawRGBBitmap(0,20,Imagen1,128,128);
+     String opcion = Serial.readString();
+     if (opcion == "1"){
+        tft.drawRGBBitmap(0,0,Imagen1,128,128);
         Serial.print("1");
-     }else if(opcion == '1'){
-        tft.drawRGBBitmap(0,20,Imagen2,128,128);
+     }else if(opcion == "2"){
+        tft.drawRGBBitmap(0,0,Imagen2,128,128);
         Serial.print("2");
-     }else if(opcion == '2'){
-        tft.drawRGBBitmap(0,20,Imagen3,128,128);
+     }else if(opcion == "3"){
+        tft.drawRGBBitmap(0,0,Imagen3,128,128);
         Serial.print("3");
+     }else if (opcion != ""){
+        tft.fillScreen(ST77XX_WHITE);
+        tft.setTextColor(ST77XX_BLACK);
+        tft.setTextSize(1);
+        tft.setCursor(15,15);
+        tft.print("Total a pagar: ");
+
+        tft.setCursor(0, 60);
+
+          Serial.print(opcion.compareTo("0.00"));
+
+        if (opcion.compareTo("0.00")==10){
+          tft.setTextSize(2);
+          tft.println("Pension activa");
+          tft.println("Puede salir");
+        }else{
+          tft.setCursor(10, 60);
+          tft.setTextSize(3);
+          tft.print("$"+opcion);
+        }
+
+        delay(5000);
+        tft.fillScreen(ST77XX_BLACK);
+        tft.drawRGBBitmap(0,0,Imagen3,128,128);
+        delay(5000);
+        tft.drawRGBBitmap(0,0,Imagen1,128,128);
      }
      //FALTA IMAGEN DE PRECIO A PAGAR
 
