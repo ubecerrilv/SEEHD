@@ -23,6 +23,7 @@ class Pantalla:
         
     def leerIDHuella(self):
         id = self.puerto.read()
+        print(id)
         if id == "0":
             return 0
         else:
