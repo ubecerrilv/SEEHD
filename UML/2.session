@@ -1,0 +1,15 @@
+window_sizes 960 1011 450 504 854 104
+cleanlooks_style
+diagrams
+  active  classdiagram_ref 128002 // Modelos
+    457 726 100 A4 0 72
+end
+show_stereotypes
+selected attribute_ref 128642 // conn
+open
+  class_ref 128002 // Administrador
+  class_ref 128130 // Pensionado
+  class_ref 128258 // Historial
+  class_ref 128386 // BaseDeDatos
+end
+end
