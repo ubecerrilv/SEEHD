@@ -3,21 +3,21 @@ format 224
 classcanvas 128002 class_ref 128002 // Administrador
   classdiagramsettings show_members_full_definition yes member_max_width 0 end
   color green
-  xyzwh 115 88 2000 135 93
+  xyzwh 83 12 2000 135 93
 end
 classcanvas 128130 class_ref 128130 // Pensionado
   classdiagramsettings show_members_full_definition yes member_max_width 0 end
   color green
-  xyzwh 283 80 2000 149 97
+  xyzwh 269 11 2000 149 97
 end
 classcanvas 128258 class_ref 128258 // Historial
   classdiagramsettings show_members_full_definition yes member_max_width 0 end
   color green
-  xyzwh 313 200 2000 157 105
+  xyzwh 115 261 2000 157 145
 end
 classcanvas 128386 class_ref 128386 // BaseDeDatos
   classdiagramsettings show_members_full_definition yes member_max_width 0 end
   color green
-  xyzwh 91 233 2005 179 127
+  xyzwh 90 116 2005 305 127
 end
 end

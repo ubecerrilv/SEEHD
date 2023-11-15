@@ -1,0 +1,54 @@
+format 224
+
+classcanvas 128002 class_ref 128002 // Administrador
+  classdiagramsettings show_members_full_definition yes member_max_width 0 end
+  color green
+  xyzwh 394.768 375.713 2000 135 93
+end
+classcanvas 128130 class_ref 128130 // Pensionado
+  classdiagramsettings show_members_full_definition yes member_max_width 0 end
+  color green
+  xyzwh 19.1647 382.213 2000 149 97
+end
+classcanvas 128258 class_ref 128258 // Historial
+  classdiagramsettings show_members_full_definition yes member_max_width 0 end
+  color green
+  xyzwh 218.605 355.547 2000 157 145
+end
+classcanvas 128386 class_ref 128386 // BaseDeDatos
+  classdiagramsettings show_members_full_definition yes member_max_width 0 end
+  color green
+  xyzwh 69.6398 187.428 2005 305 126
+end
+classcanvas 128514 class_ref 134914 // Ventana
+  classdiagramsettings member_max_width 0 end
+  color orange
+  xyz 345.937 88.22 2000
+end
+classcanvas 128642 class_ref 135042 // Controlador
+  classdiagramsettings member_max_width 0 end
+  color gray
+  xyz 171.251 92.3755 2005
+end
+classcanvas 128770 class_ref 135170 // SEEDAdmin
+  classdiagramsettings member_max_width 0 end
+  color blue
+  xyz 8.85453 92.7755 2010
+end
+relationcanvas 128898 relation_ref 128002 // <dependency>
+  from ref 128770 z 2011 to ref 128642
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129026 relation_ref 128130 // <unidirectional association>
+  decenter_end 464
+  from ref 128642 z 2006 to ref 128386
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+relationcanvas 129154 relation_ref 128258 // <unidirectional association>
+  from ref 128642 z 2006 to ref 128514
+  no_role_a no_role_b
+  no_multiplicity_a no_multiplicity_b
+end
+end

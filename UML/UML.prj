@@ -1,6 +1,6 @@
 format 224
 "UML"
-  revision 1
+  revision 2
   modified_by 2 "ubecerril"
 
 
@@ -202,6 +202,90 @@ ${docstring}${body}
 "
 	
       end
+
+      attribute 135298 "id"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135426 "entrada"
+	private explicit_type "Date"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135554 "salida"
+	private explicit_type "Date"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135682 "horas"
+	private explicit_type "double"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135810 "usuario_id"
+	private explicit_type "int"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 135938 "nombreUsr"
+	private explicit_type "String"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
+
+      attribute 136066 "cobro"
+	private explicit_type "double"
+	cpp_decl ""
+	java_decl ""
+	php_decl ""
+	python_decl "${comment}${self}${name} = ${value}
+"
+	idl_decl ""
+	mysql_decl ""
+	MysqlColumn
+      end
     end
 
     class 128386 "BaseDeDatos"
@@ -239,7 +323,116 @@ ${docstring}${body}
 	mysql_decl ""
 	MysqlColumn
       end
+
+      operation 134914 "obtenerHistorial"
+	public explicit_return_type "List<Historial>"
+	nparams 1
+	  param in name "historial" type class_ref 128258 // Historial
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${p0}${v0}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      operation 135042 "agregarPensionado"
+	public explicit_return_type "void"
+	nparams 1
+	  param in name "pensionado" type class_ref 128130 // Pensionado
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${p0}${v0}${)}:
+${docstring}${body}
+"
+	
+      end
+
+      operation 135170 "validarAdministrador"
+	public explicit_return_type "bool"
+	nparams 1
+	  param in name "admin" type class_ref 128002 // Administrador
+	
+	
+	
+	python_def "${@}${static}${abstract}def ${name}${(}${p0}${v0}${)}:
+${docstring}${body}
+"
+	
+      end
     end
 
+    classdiagram 134658 "MVC"
+      classdiagramsettings member_max_width 0 end
+      size A4
+    end
+
+    class 134914 "Ventana"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+    end
+
+    class 135042 "Controlador"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 128130 // <unidirectional association>
+	relation 128130 --->
+	  a role_name "" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 128130 // <unidirectional association>
+	  b parent class_ref 128386 // BaseDeDatos
+      end
+
+      classrelation 128258 // <unidirectional association>
+	relation 128258 --->
+	  a role_name "" private
+	    python "${comment}${self}${name} = ${value}
+"
+	    classrelation_ref 128258 // <unidirectional association>
+	  b parent class_ref 134914 // Ventana
+      end
+    end
+
+    class 135170 "SEEDAdmin"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl "class ${name}${inherit}:
+${docstring}${members}
+"
+      idl_decl ""
+      explicit_switch_type ""
+      mysql_decl ""
+      
+      classrelation 128002 // <dependency>
+	relation 128002 -_->
+	  a public
+	    python "${type}"
+	    classrelation_ref 128002 // <dependency>
+	  b parent class_ref 135042 // Controlador
+      end
+    end
   end
 end
