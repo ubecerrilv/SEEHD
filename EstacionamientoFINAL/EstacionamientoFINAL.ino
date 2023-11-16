@@ -1,29 +1,30 @@
+//LIBRERIAS SENSOR
 #include <Adafruit_Fingerprint.h>
 
 //LIBRERIAS PANTALLA
-#include <Adafruit_ST7735.h>  // Hardware-specific library for ST7735
+#include <Adafruit_ST7735.h>
 #include <SPI.h>
 #include "Adafruit_GFX.h"
 #include "1.h"
 #include "2.h"
 #include "3.h"
 
-// Use the default hardware UART on ESP32 (Serial2)
-#define mySerial Serial2
+// USO DEL SERIAL 2 PARA EL SENSOR
+#define puerto Serial2
+Adafruit_Fingerprint finger = Adafruit_Fingerprint(&puerto);
 
 //PINES DE LA PANTALLA
-  #define TFT_CS         15  //case
-  #define TFT_RST        19 //reset
-  #define TFT_DC         1 //AO 
-  #define TFT_MOSI       3 //Data = SDA 
-  #define TFT_SCLK       18 //Clock = SCK 
-
+#define TFT_CS         15  //case
+#define TFT_RST        19 //reset
+#define TFT_DC         1 //AO 
+#define TFT_MOSI       3 //Data = SDA 
+#define TFT_SCLK       18 //Clock = SCK 
 Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_MOSI, TFT_SCLK, TFT_RST);
 
-Adafruit_Fingerprint finger = Adafruit_Fingerprint(&mySerial);
-
+//VARIABLE QUE CONTROLA EL NUMERO DE HUELLAS
 uint8_t id = 1;
 
+//PENDIENTE
 void mensaje(String mensaje){
   Serial.println("entra");
   tft.fillScreen(ST77XX_WHITE);
@@ -41,23 +42,23 @@ void setup() {
   tft.drawRGBBitmap(0,0,Imagen1,128,128);
 
   Serial.begin(9600);
-  while (!Serial);  // Wait for the serial port to open
-  delay(100);
-  Serial.println("Adafruit Fingerprint sensor enrollment");
 
-  // Set the data rate for the sensor serial port
+  //SENSOR INICIADO A 57600 BAUDIOS
   finger.begin(57600);
 
   if (finger.verifyPassword()) {
-    Serial.println("Found fingerprint sensor!");
+    Serial.println("Sensor encontrado");
   } else {
-    Serial.println("Did not find fingerprint sensor :(");//ERROR
-    while (1) { delay(1); }
+    Serial.println("No se logró encontrar el sensor");
+    while (true) { 
+      delay(1);
+    }
   }
 
+  //RECUPERAR EL NUMERO DE HUELLAS GUARDADO
   finger.getTemplateCount();
   id = finger.templateCount;
-  //finger.emptyDatabase();
+  finger.emptyDatabase();
 
 }
 

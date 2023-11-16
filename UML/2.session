@@ -1,10 +1,13 @@
-window_sizes 1366 699 240 1120 542 104
+window_sizes 1920 1011 240 1674 854 104
 cleanlooks_style
 diagrams
-  active  classdiagram_ref 128002 // Modelos
-    457 726 100 A4 0 72
+  classdiagram_ref 128002 // Modelos
+    457 726 100 A4 0 0
+  active  classdiagram_ref 134658 // MVC
+    1339 683 100 A4 0 0
 end
 show_stereotypes
+selected classdiagram_ref 134658 // MVC
 open
   class_ref 128002 // Administrador
   class_ref 128130 // Pensionado
