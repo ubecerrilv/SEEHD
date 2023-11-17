@@ -24,21 +24,3 @@ class SEEHD:
         
         #INICIAR EL PROGRAMA (POSIBLE WHILE TRUE AQUI)
         controlador.iniciar()
-        
-"""EJECUCIÓN DE LOS METODOS
-#IMPORTAR LAS LIBRERÍAS NECESARIAS
-
-
-#DEFINIR VARIABLES NECESARIAS
-
-
-#DEFINICIÓN DEL METODO PRICINCIPAL
-def iniciar():
-    entrada = input("Ingresa una imagen a mostrar: ")
-    puerto.write(str(entrada).encode())
-    
-    
-#EJECUCION
-while True:
-    iniciar()
-    """

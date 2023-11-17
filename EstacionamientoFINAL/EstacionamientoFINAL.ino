@@ -14,11 +14,14 @@
 Adafruit_Fingerprint finger = Adafruit_Fingerprint(&puerto);
 
 //PINES DE LA PANTALLA
-#define TFT_CS         15  //case
+/*#define TFT_CS         15  //case
 #define TFT_RST        19 //reset
 #define TFT_DC         1 //AO 
 #define TFT_MOSI       3 //Data = SDA 
-#define TFT_SCLK       18 //Clock = SCK 
+#define TFT_SCLK       18 //Clock = SCK */
+
+
+
 Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_MOSI, TFT_SCLK, TFT_RST);
 
 //VARIABLE QUE CONTROLA EL NUMERO DE HUELLAS
