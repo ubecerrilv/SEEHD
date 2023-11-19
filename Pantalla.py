@@ -7,27 +7,17 @@ import serial
 
 class Pantalla:
     def __init__(self):
-     self.puerto = serial.Serial('/dev/ttyUSB0', 9600)
-        
-    def mostrarMPrincipal(self):
-        self.puerto.write(str("1").encode())
-        
-    def mostrarMCEntrada(self):
-        self.puerto.write(str("2").encode())
-    
-    def mostrarMCSalida(self):
-        self.puerto.write(str("3").encode())#PENDIENTE
-    
-    def mostrarMSalida(self):
-        self.puerto.write(str("4").encode())
+        self.puerto = serial.Serial('/dev/ttyUSB0', 9600)
         
     def leerIDHuella(self):
-        id = self.puerto.read()
-        print(id)
-        if id == "0":
-            return 0
-        else:
-            return int(id)
+        id = self.puerto.readline().decode().strip()
+        
+        try:
+            id = int(id)
+        except ValueError:
+            print("Error al leer id entrante")
+        
+        return id
     
-    def mostrarPago(pago):
-        self.puerto.write(str(pago).encode)
+    def mostrarPago(self, pago):
+        self.puerto.write(str(pago).encode())

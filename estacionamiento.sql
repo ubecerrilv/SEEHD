@@ -14,9 +14,8 @@ CREATE TABLE Cobro (
 
 -- Crear la tabla Usuario
 CREATE TABLE Usuario (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id INT PRIMARY KEY,
     nombre VARCHAR(50),
-    tipo BOOLEAN NOT NULL,
     pago BOOLEAN,
     cargo VARCHAR(15)
 );

@@ -3,6 +3,7 @@
               CLASE QUE REALIZA LAS INTERACCIONES CON LA BASE DE DATOS
 --------------------------------------------------------------------------------------
 """
+import math
 import mysql.connector
 import Usuario
 from datetime import datetime
@@ -58,11 +59,10 @@ class BaseDeDatos:
     
     def registrarUsr(self, usuario):#USUARIO NUEVO PARA ENTRADA (NO PENSION)#VERIFICAR
         usuario_id = usuario.getID()
-        tipo = False
-        sql = "INSERT INTO Usuario (id, tipo) VALUES(%s, %s)"
-        val = (usuario_id, tipo)
+        cursor.execute("INSERT INTO Usuario (id) VALUES("+str(usuario_id)+")")
+        """sql = "INSERT INTO Usuario (id) VALUES(%s)"
         
-        cursor.execute(sql, val)
+        cursor.execute(sql, (usuario_id),)"""
         conexion.commit()
     
     def registrarSalida(self, usuario):#REGISTRAR LA SALIDA DE UN USUARIO RETORNA USUARIO CON LAS HORAS Y EL COBRO
@@ -70,32 +70,35 @@ class BaseDeDatos:
         fecha_hora_actual = datetime.now()
 
         # Actualizar el registro en la tabla Historia
-        sql = "UPDATE Historia SET salida = %s, horas = TIMEDIFF(%s, entrada) WHERE usuario_id = %s AND salida IS NULL"
+        
+        sql = "UPDATE Historia SET salida = %s, horas = ROUND(TIMESTAMPDIFF(SECOND, entrada, %s) / 3600.0, 2) WHERE usuario_id = %s AND salida IS NULL"
         val = (fecha_hora_actual, fecha_hora_actual, usuario_id)
         cursor.execute(sql, val)
         conexion.commit()
         
-       # Consulta para obtener los datos del usuario y la última tarifa de cobro
+        # Consulta para obtener los datos del usuario y la última tarifa de cobro
         sql = """
         SELECT u.ID, h.entrada, h.salida, h.horas, c.precio AS cobroHora
         FROM Usuario u
         INNER JOIN Historia h ON u.ID = h.usuario_id
         LEFT JOIN Cobro c ON h.cobro_id = c.id
         WHERE u.ID = %s
-        ORDER BY h.entrada DESC
+        ORDER BY h.id DESC
         LIMIT 1
         """
         val = (usuario_id,)
         cursor.execute(sql, val)
         resultado = cursor.fetchone()
-
-        if resultado:
-            ID, entrada, salida, horas, cobroHora = resultado
-            if horas is not None:
-                cobroTotal = round(horas * cobroHora, 2)
-            else:
-                cobroTotal = None
-            usr = Usuario(ID, entrada, salida, horas, cobroHora, cobroTotal)
-            return usr
+        
+        ID, entrada, salida, horas, cobroHora = resultado
+        
+        aux = horas-math.floor(horas)
+        if aux <=0.25:
+            horasReal = math.floor(horas)
         else:
-            return None
+            horasReal = math.ceil(horas)
+        
+        cobroTotal = round(horasReal * cobroHora, 2)
+        
+        usr = Usuario.Usuario.noPen(ID, entrada, salida, horas, cobroHora, cobroTotal)
+        return usr
