@@ -9,6 +9,9 @@
 #include "2.h"
 #include "3.h"
 
+//LIBRERIAS SERVOS
+#include <ESP32Servo.h>
+
 // USO DEL SERIAL 2 PARA EL SENSOR
 #define puerto Serial2
 Adafruit_Fingerprint finger = Adafruit_Fingerprint(&puerto);
@@ -21,11 +24,20 @@ Adafruit_Fingerprint finger = Adafruit_Fingerprint(&puerto);
 #define TFT_SCLK       18 //Clock = SCK 
 Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_MOSI, TFT_SCLK, TFT_RST);
 
+//SERVOS
+Servo entrada;
+Servo salida;
+
 //VARIABLE QUE CONTROLA EL NUMERO DE HUELLAS
 int id;
 
 void setup() {
   Serial.begin(9600);
+  //INICIANDO SERVOS
+  entrada.attach(2);
+  salida.attach(4);
+  entrada.write(0);
+  salida.write(0);
 
   //PANTALLA
   tft.initR(INITR_BLACKTAB);
@@ -70,6 +82,7 @@ void loop() {
       Serial.println(idAct);
 
       //MOVER SERVO PARA ENTRAR
+      entrar();
 
       id++;
       delay(1000);
@@ -81,6 +94,7 @@ void loop() {
     //Serial.print("Ya registrada: ");
     Serial.println(idAct);
     delay(1000);
+
     //LEER COBRO DEL SERIAL MONITOR
     if (Serial.available() > 0) {
 
@@ -93,24 +107,23 @@ void loop() {
       //BOTON DE CONFIRMACION DE PAGO
       if(cobro == 0.00){//MENOS DE 15 MIN
         mensaje("Tiempo de cortesia");
-        delay(3000);
         tft.drawRGBBitmap(0,0,Imagen3,128,128);
-        delay(3000);
+        salir();
         tft.drawRGBBitmap(0,0,Imagen1,128,128);
       }else{
         mensaje("$"+datoRecibido);
         delay(3000);
         tft.drawRGBBitmap(0,0,Imagen3,128,128);
-        delay(3000);
+        salir();
         tft.drawRGBBitmap(0,0,Imagen1,128,128);
       }//FIN ELSE MOSTRAR COBRO
     }else{//FIN IF LEER COBRO
 
       mensaje("Bienvenido a la FI!");
       delay(3000);
-      tft.drawRGBBitmap(0,0,Imagen1,128,128);
       //MOVER SERVO PARA ENTRAR
-
+      entrar();
+      tft.drawRGBBitmap(0,0,Imagen1,128,128);
     }//FIN ELSE MOVER SERVO ENTRAR SI NO HAY NADA QUE LEER
   }//FIN ELSE YA REGISTRADA
 }//FIN LOOP
@@ -282,3 +295,17 @@ void error(){
   tft.drawRGBBitmap(0,0,Imagen1,128,128);
   tft.setTextColor(ST77XX_BLACK);
 }//FIN ERROR
+
+//FUNCION PARA MOVER EL SERVO AL ENTRAR 
+void entrar(void){
+  entrada.write(90);
+  delay(3000);
+  entrada.write(0);
+}//FIN ENTRAR
+
+//FUNCION PARA MOVER EL SERVO AL SALIR
+void salir(void){
+  salida.write(90);
+  delay(3000);
+  salida.write(0);
+}//FIN SALIR
