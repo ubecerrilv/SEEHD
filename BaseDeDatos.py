@@ -78,7 +78,7 @@ class BaseDeDatos:
         
         # Consulta para obtener los datos del usuario y la última tarifa de cobro
         sql = """
-        SELECT u.ID, h.entrada, h.salida, h.horas, c.precio AS cobroHora
+        SELECT u.ID, u.cobro, h.entrada, h.salida, h.horas, c.precio AS cobroHora
         FROM Usuario u
         INNER JOIN Historia h ON u.ID = h.usuario_id
         LEFT JOIN Cobro c ON h.cobro_id = c.id
@@ -90,7 +90,7 @@ class BaseDeDatos:
         cursor.execute(sql, val)
         resultado = cursor.fetchone()
         
-        ID, entrada, salida, horas, cobroHora = resultado
+        ID, cobro, entrada, salida, horas, cobroHora = resultado
         
         aux = horas-math.floor(horas)
         if aux <=0.25:
@@ -98,7 +98,10 @@ class BaseDeDatos:
         else:
             horasReal = math.ceil(horas)
         
-        cobroTotal = round(horasReal * cobroHora, 2)
-        
+        if cobro:
+            cobroTotal = -1
+        else:
+            cobroTotal = round(horasReal * cobroHora, 2)
+            
         usr = Usuario.Usuario.noPen(ID, entrada, salida, horas, cobroHora, cobroTotal)
         return usr

@@ -1,6 +1,6 @@
 """
 -------------------------------------------------------------------------------------
-   CLASE QUE SE COMUNICA CON EL SERIAL DENTRO DE ARDUINO PARA MOSTRAR LAS IMÁGENES
+    CLASE QUE SE COMUNICA CON EL SERIAL DENTRO DE ARDUINO PARA MOSTRAR LAS IMÁGENES
 --------------------------------------------------------------------------------------
 """
 import serial

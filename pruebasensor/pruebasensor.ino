@@ -102,11 +102,13 @@ void loop() {
       float cobro = datoRecibido.toFloat();
 
       //AGREGAR ELSE PENSIONADO -1
-      //TIEMPO DE ESTANCIA
-      //MOVER SERVO SALIR
-      //BOTON DE CONFIRMACION DE PAGO
       if(cobro == 0.00){//MENOS DE 15 MIN
         mensaje("Tiempo de cortesia");
+        tft.drawRGBBitmap(0,0,Imagen3,128,128);
+        salir();
+        tft.drawRGBBitmap(0,0,Imagen1,128,128);
+      }else if(cobro == -1.00){
+        mensaje("Pensionado, puede salir");
         tft.drawRGBBitmap(0,0,Imagen3,128,128);
         salir();
         tft.drawRGBBitmap(0,0,Imagen1,128,128);
