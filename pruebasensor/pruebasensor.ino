@@ -37,7 +37,7 @@ void setup() {
   entrada.attach(2);
   salida.attach(4);
   entrada.write(0);
-  salida.write(0);
+  salida.write(90);
 
   //PANTALLA
   tft.initR(INITR_BLACKTAB);
@@ -305,7 +305,7 @@ void entrar(void){
 
 //FUNCION PARA MOVER EL SERVO AL SALIR
 void salir(void){
-  salida.write(90);
-  delay(3000);
   salida.write(0);
+  delay(3000);
+  salida.write(90);
 }//FIN SALIR
